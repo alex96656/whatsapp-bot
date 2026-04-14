@@ -1,58 +1,46 @@
-const {
-  default: makeWASocket,
-  useMultiFileAuthState
-} = require("@whiskeysockets/baileys")
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require("@whiskeysockets/baileys")
+const readline = require("readline")
 
-const owner = {
-  name: "ᴹᴿ•ᴀʟᴇx᭄",
-  number: "YOUR_NUMBER_HERE"
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+function question(text) {
+  return new Promise((resolve) => rl.question(text, resolve))
 }
 
 async function startBot() {
-
-  const { state, saveCreds } = await useMultiFileAuthState("./auth")
+  const { state, saveCreds } = await useMultiFileAuthState("auth_info_baileys")
 
   const sock = makeWASocket({
     auth: state,
     printQRInTerminal: false
   })
 
+  // Save session
   sock.ev.on("creds.update", saveCreds)
 
-  sock.ev.on("messages.upsert", async ({ messages }) => {
+  // Pairing code login
+  if (!sock.authState.creds.registered) {
+    const phoneNumber = await question("Enter your WhatsApp number (e.g 234703xxxxxxx): ")
 
-    const msg = messages[0]
-    if (!msg.message) return
+    const code = await sock.requestPairingCode(phoneNumber)
+    console.log("Your Pairing Code:", code)
+  }
 
-    const text =
-      msg.message.conversation ||
-      msg.message.extendedTextMessage?.text
+  sock.ev.on("connection.update", (update) => {
+    const { connection } = update
 
-    const sender = msg.key.remoteJid
-
-    // 🌟 Simple menu command
-    if (text === ".menu") {
-      await sock.sendMessage(sender, {
-        text: `
-🤖 BOT MENU
-
-👤 Owner: ${owner.name}
-📞 Number: ${owner.number}
-
-Commands:
-.menu - show menu
-.ping - test bot
-        `
-      })
+    if (connection === "open") {
+      console.log("Bot connected successfully ✅")
     }
 
-    // 🟢 Ping test
-    if (text === ".ping") {
-      await sock.sendMessage(sender, { text: "🏓 Pong!" })
+    if (connection === "close") {
+      console.log("Connection closed, restarting...")
+      startBot()
     }
-
   })
-
 }
 
 startBot()
