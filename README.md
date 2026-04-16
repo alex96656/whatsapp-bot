@@ -61,3 +61,46 @@ git clone https://github.com/alex96656/REPO_NAME
 cd REPO_NAME
 npm install
 npm start
+
+# ⚠️ IMPORTANT WARNING
+
+This WhatsApp bot is created for **educational and automation purposes only**.
+
+- ❗ Do NOT use this bot for spam, abuse, or illegal activities  
+- ❗ The developer is NOT responsible for any misuse  
+- ❗ Use at your own risk  
+- ❗ WhatsApp may ban accounts if used incorrectly  
+
+---
+
+# 📜 LEGAL NOTICE
+
+- This project is not affiliated with WhatsApp Inc.  
+- WhatsApp is a registered trademark of Meta Platforms Inc.  
+- This bot uses open-source libraries (Baileys)  
+- Any misuse of this tool is strictly the user's responsibility  
+
+---
+
+# 📄 LICENSE
+
+This project is licensed under the **ISC License**.
+
+✔️ You are allowed to:
+- Use the bot
+- Modify the code
+- Deploy it for personal use
+
+❌ You are NOT allowed to:
+- Sell this project without permission
+- Remove credit from the developer
+- Claim it as your own original work
+
+---
+
+# ⚙️ SETUP & INSTALLATION
+
+## 1. Clone the repository
+```bash id="setup1"
+git clone https://github.com/alex96656/REPO_NAME
+cd REPO_NAME
