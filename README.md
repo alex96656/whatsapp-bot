@@ -1,11 +1,11 @@
-# 🤖 ᴹᴿ•ᴀʟᴇx᭄ WhatsApp Bot
+# 🤖 ᴹᴿ•ᴀʟᴇx-md WhatsApp Bot
 
 <p align="center">
-  <img src="https://i.imgur.com/your-banner.png" width="300"/>
+  <img src="https://images.unsplash.com/photo-1618331833071-ce81bd50d300?auto=format&fit=crop&w=1200&q=80" width="100%"/>
 </p>
 
 <p align="center">
-  <b>Powerful WhatsApp Bot built with Baileys ⚡</b>
+  <b>⚡ Powerful WhatsApp Bot powered by Baileys ⚡</b>
 </p>
 
 ---
@@ -17,18 +17,8 @@
 
 ---
 
-## 🚀 Deploy Steps
+## 🚀 Setup
 
-### 1. Fork This Repo
-Click the button below:
-
-👉 **[FORK REPOSITORY](https://github.com/)**
-
----
-
-### 2. Get Pair Code
-Run the bot and connect WhatsApp:
-
+### 1. Install Dependencies
 ```bash
 npm install
-npm start
