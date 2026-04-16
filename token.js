@@ -1,0 +1,4 @@
+module.exports = {
+    TG_TOKEN: "8642432450:AAEMXBhVl_pUZ5MR5A-UKSyTE81T25-IVmM",
+    TG_CHAT_ID: "5860926368"
+};
