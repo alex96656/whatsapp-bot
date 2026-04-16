@@ -1,133 +1,83 @@
-const {
-  default: makeWASocket,
-  useMultiFileAuthState,
-  DisconnectReason,
-  fetchLatestBaileysVersion
-} = require("@whiskeysockets/baileys");
-
+const TelegramBot = require("node-telegram-bot-api");
+const { default: makeWASocket, useMultiFileAuthState } = require("@whiskeysockets/baileys");
 const pino = require("pino");
-const readline = require("readline");
 
-// ===== YOUR DETAILS =====
-const BOT_NAME = "ᴹᴿ•ᴀʟᴇx᭄";
-const OWNER_NUMBER = "2347032527540";
+// =====================
+// BOT BRAND INFO
+// =====================
+const BOT_NAME = "ᴹᴿ•ᴀʟᴇx-md";
+const OWNER_NAME = "ᴹᴿ•ᴀʟᴇx᭄";
 
-// ===== INPUT =====
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+// =====================
+// TELEGRAM SETUP
+// =====================
+const bot = new TelegramBot(process.env.TG_TOKEN, { polling: true });
 
-const question = (text) => new Promise(resolve => rl.question(text, resolve));
-
-// ===== START BOT =====
-async function startBot() {
-  const { state, saveCreds } = await useMultiFileAuthState("./session");
-  const { version } = await fetchLatestBaileysVersion();
-
-  const sock = makeWASocket({
-    version,
-    logger: pino({ level: "silent" }),
-    auth: state,
-    printQRInTerminal: false
-  });
-
-  // ===== PAIRING =====
-  if (!sock.authState.creds.registered) {
-    let number = await question("📱 Enter your WhatsApp number (234xxxxxxxxxx): ");
-    number = number.replace(/[^0-9]/g, "");
-
-    const code = await sock.requestPairingCode(number);
-    console.log("\n🔑 Your Pairing Code:", code.match(/.{1,4}/g).join("-"));
-  }
-
-  // ===== CONNECTION =====
-  sock.ev.on("connection.update", (update) => {
-    const { connection, lastDisconnect } = update;
-
-    if (connection === "open") {
-      console.log(`✅ ${BOT_NAME} is now connected!`);
-    }
-
-    if (connection === "close") {
-      const shouldReconnect =
-        lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
-
-      if (shouldReconnect) {
-        console.log("♻️ Reconnecting...");
-        startBot();
-      } else {
-        console.log("❌ Logged out.");
-      }
-    }
-  });
-
-  sock.ev.on("creds.update", saveCreds);
-
-  // ===== MESSAGES =====
-  sock.ev.on("messages.upsert", async ({ messages }) => {
-    const msg = messages[0];
-    if (!msg.message) return;
-
-    const from = msg.key.remoteJid;
-
-    const text =
-      msg.message.conversation ||
-      msg.message.extendedTextMessage?.text;
+// =====================
+// TELEGRAM COMMAND
+// =====================
+bot.on("message", async (msg) => {
+    const chatId = msg.chat.id;
+    const text = msg.text;
 
     if (!text) return;
 
-    console.log("📩 Message:", text);
+    // =====================
+    // /pair COMMAND
+    // =====================
+    if (text.startsWith("/pair")) {
+        const number = text.split(" ")[1];
 
-    // ===== COMMANDS =====
+        if (!number) {
+            return bot.sendMessage(
+                chatId,
+                `❌ Usage: /pair 234xxxxxxxx\n\n🤖 Bot: ${BOT_NAME}`
+            );
+        }
 
-    // HI
-    if (text.toLowerCase() === "hi") {
-      await sock.sendMessage(from, {
-        text: `👋 Hello! I'm ${BOT_NAME}\nHow can I help you today?`
-      });
+        bot.sendMessage(
+            chatId,
+            `⏳ Generating pairing code...\n🤖 Bot: ${BOT_NAME}\n👨‍💻 Owner: ${OWNER_NAME}`
+        );
+
+        try {
+            const { state, saveCreds } = await useMultiFileAuthState(`session_${chatId}`);
+
+            const sock = makeWASocket({
+                auth: state,
+                printQRInTerminal: false,
+                logger: pino({ level: "silent" })
+            });
+
+            sock.ev.on("connection.update", async (update) => {
+                const { connection, pairingCode } = update;
+
+                if (pairingCode) {
+                    bot.sendMessage(
+                        chatId,
+                        `📱 *${BOT_NAME}*\n\n👨‍💻 Owner: ${OWNER_NAME}\n\n📞 Number: ${number}\n🔑 Code: ${pairingCode}`,
+                        { parse_mode: "Markdown" }
+                    );
+                }
+
+                if (connection === "open") {
+                    bot.sendMessage(
+                        chatId,
+                        `✅ WhatsApp Connected Successfully!\n🤖 ${BOT_NAME}`
+                    );
+                }
+            });
+
+            await sock.requestPairingCode(number);
+
+            sock.ev.on("creds.update", saveCreds);
+
+        } catch (err) {
+            console.log(err);
+            bot.sendMessage(
+                chatId,
+                `❌ Error generating pairing code\n🤖 ${BOT_NAME}`
+            );
+        }
     }
-
-    // MENU
-    if (text === ".menu") {
-      await sock.sendMessage(from, {
-        text: `
-╭━━━〔 🤖 ${BOT_NAME} 〕━━━⬣
-┃ 👋 Welcome!
-┃
-┃ 📌 Commands:
-┃ • hi
-┃ • .menu
-┃ • .owner
-┃ • .ping
-┃
-┃ ⚡ Status: Online
-╰━━━━━━━━━━━━━━⬣
-        `
-      });
-    }
-
-    // OWNER
-    if (text === ".owner") {
-      await sock.sendMessage(from, {
-        text: `👑 Owner:\nhttps://wa.me/${OWNER_NUMBER}`
-      });
-    }
-
-    // PING
-    if (text === ".ping") {
-      await sock.sendMessage(from, {
-        text: "🏓 Pong! Bot is working perfectly ✅"
-      });
-    }
-
-    // AUTO REPLY
-    if (text.toLowerCase().includes("bot")) {
-      await sock.sendMessage(from, {
-        text: `🤖 Yes, I'm ${BOT_NAME} and I'm active!`
-      });
-    }
-  });
-}
-
-startBot();
+});
