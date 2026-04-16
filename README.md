@@ -34,20 +34,23 @@
 
 ---
 
-# ⚡ DEPLOYMENT
+# ⚡ DEPLOYMENT OPTIONS
 
-## 🚀 Deploy on Render
+## 🚀 Render Deploy
 <p align="center">
-  <a href="https://render.com/deploy?repo=YOUR_REPO_LINK">
+  <a href="https://render.com/deploy?repo=https://github.com/alex96656/REPO_NAME">
     <img src="https://img.shields.io/badge/Deploy-Render-blue?style=for-the-badge&logo=render"/>
   </a>
 </p>
 
+🌐 Live Bot:
+👉 https://whatsapp-bot-t5au.onrender.com
+
 ---
 
-## ☁️ Deploy on Railway
+## ☁️ Railway Deploy
 <p align="center">
-  <a href="https://railway.app/new/template?template=YOUR_REPO_LINK">
+  <a href="https://railway.app/new/template?template=https://github.com/alex96656/REPO_NAME">
     <img src="https://img.shields.io/badge/Deploy-Railway-purple?style=for-the-badge&logo=railway"/>
   </a>
 </p>
@@ -56,9 +59,8 @@
 
 ## 🖥️ VPS DEPLOY
 
-```bash id="vpsfinal1"
+```bash id="vpsfinalrender"
 git clone https://github.com/alex96656/REPO_NAME
 cd REPO_NAME
 npm install
 npm start
-
