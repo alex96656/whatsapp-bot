@@ -1,15 +1,24 @@
 # 🤖 ᴹᴿ•ᴀʟᴇx-md WhatsApp Bot
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&pause=1000&color=00F7FF&center=true&vCenter=true&width=600&lines=coded+by+ᴹᴿ•ᴀʟᴇx;WhatsApp+Bot+with+Baileys;Fast+%7C+Powerful+%7C+Modern" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&pause=1000&color=00F7FF&center=true&vCenter=true&width=600&lines=ᴹᴿ•ᴀʟᴇx-md+WhatsApp+Bot;Fast+%7C+Powerful+%7C+Modern;Baileys+Powered+Automation" />
 </p>
 
 ---
 
-## 📊 Status
-![Bot](https://img.shields.io/badge/Bot-Active-green)
-![Version](https://img.shields.io/badge/Version-1.0.0-blue)
-![License](https://img.shields.io/badge/License-ISC-yellow)
+<p align="center">
+  <img src="https://img.shields.io/badge/Bot-Active-green" />
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue" />
+  <img src="https://img.shields.io/badge/License-ISC-yellow" />
+</p>
+
+---
+
+# ✨ Coded By
+
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&pause=1000&color=FF00FF&center=true&vCenter=true&width=500&lines=Coded+by+ᴹᴿ•ᴀʟᴇx" />
+</p>
 
 ---
 
@@ -21,11 +30,11 @@
   </a>
 </p>
 
-👉 Fork here: https://github.com/alex96656
+👉 GitHub: https://github.com/alex96656
 
 ---
 
-# ⚡ DEPLOYMENT OPTIONS
+# ⚡ DEPLOYMENT
 
 ## 🚀 Deploy on Render
 <p align="center">
@@ -46,7 +55,8 @@
 ---
 
 ## 🖥️ VPS DEPLOY
-```bash id="vpsdeploy1"
+
+```bash id="vpsfinal1"
 git clone https://github.com/alex96656/REPO_NAME
 cd REPO_NAME
 npm install
