@@ -1,45 +1,33 @@
 # 🤖 ᴹᴿ•ᴀʟᴇx᭄ WhatsApp Bot
 
-Welcome to **ᴹᴿ•ᴀʟᴇx᭄ Bot** 🚀  
-A powerful WhatsApp automation bot built using Baileys.
+<p align="center">
+  <img src="https://i.imgur.com/your-banner.png" width="300"/>
+</p>
+
+<p align="center">
+  <b>Powerful WhatsApp Bot built with Baileys ⚡</b>
+</p>
 
 ---
 
-## ⚡ Features
-- 🤖 Auto Reply System  
-- 👑 Owner Commands  
-- 📩 Menu System  
-- 🔥 Fast & Lightweight  
-- 💬 WhatsApp Pairing Login  
+## 📊 Status
+![Bot](https://img.shields.io/badge/Bot-Active-green)
+![Version](https://img.shields.io/badge/Version-1.0.0-blue)
+![License](https://img.shields.io/badge/License-ISC-yellow)
 
 ---
 
-## 🚀 Steps to Deploy
+## 🚀 Deploy Steps
 
-### 1. Fork This Repository
-Click the button below to fork:
+### 1. Fork This Repo
+Click the button below:
 
-👉 Click **Fork** (on top right of GitHub)
+👉 **[FORK REPOSITORY](https://github.com/)**
 
 ---
 
 ### 2. Get Pair Code
-Run the bot and connect your WhatsApp:
-
-- Open Replit / Terminal  
-- Start bot  
-- Enter your number  
-- Get pairing code  
-
----
-
-### 3. Deploy Bot
-Deploy using:
-- Railway  
-- Render  
-- VPS  
-
-Then start with:
+Run the bot and connect WhatsApp:
 
 ```bash
 npm install
