@@ -1,7 +1,7 @@
 import { getCommands } from "../handler.js";
 import {
   BotName,ᴹᴿ•ᴀʟᴇx-MD
-  BotVersion,"1.0.0
+  BotVersion,"1.0.0"
   OwnerName,ᴹᴿ•ᴀʟᴇx᭄
   MenuImage,https://images.unsplash.com/photo-1526318472351-c75fcf070305
   MenuAudio
