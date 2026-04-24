@@ -1,5 +1,3 @@
-
-//premium.js
 import fs from "fs";
 import path from "path";
 
@@ -9,42 +7,46 @@ if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
 const premiumFile = path.join(baseDir, "premium.json");
 if (!fs.existsSync(premiumFile)) fs.writeFileSync(premiumFile, "[]");
 
+// --- Lire la liste premium ---
+function readPremium() {
+  try {
+    return JSON.parse(fs.readFileSync(premiumFile, "utf-8"));
+  } catch {
+    return [];
+  }
+}
+
 // --- Vérifie si un numéro est Premium ---
 export function isPremium(number) {
-  try {
-    const data = JSON.parse(fs.readFileSync(premiumFile, "utf-8"));
-    const clean = number.replace(/[^0-9]/g, "");
-    return data.includes(clean);
-  } catch (e) {
-    console.error("[PREMIUM] Erreur lecture fichier:", e);
-    return false;
-  }
+  const clean = number.replace(/[^0-9]/g, "");
+  const data = readPremium();
+  return data.includes(clean);
 }
 
 // --- Ajouter un utilisateur Premium ---
 export function addPremium(number) {
-  try {
-    const data = JSON.parse(fs.readFileSync(premiumFile, "utf-8"));
-    const clean = number.replace(/[^0-9]/g, "");
-    if (!data.includes(clean)) {
-      data.push(clean);
-      fs.writeFileSync(premiumFile, JSON.stringify(data, null, 2));
-      console.log(`[PREMIUM] ✅ Ajouté: ${clean}`);
-    }
-  } catch (e) {
-    console.error("[PREMIUM] Erreur ajout:", e);
+  const clean = number.replace(/[^0-9]/g, "");
+  const data = readPremium();
+  if (!data.includes(clean)) {
+    data.push(clean);
+    fs.writeFileSync(premiumFile, JSON.stringify(data, null, 2));
+    console.log(`[PREMIUM] ✅ Ajouté : ${clean}`);
+    return true;
   }
+  return false;
 }
 
 // --- Supprimer un utilisateur Premium ---
 export function delPremium(number) {
-  try {
-    let data = JSON.parse(fs.readFileSync(premiumFile, "utf-8"));
-    const clean = number.replace(/[^0-9]/g, "");
-    data = data.filter(n => n !== clean);
-    fs.writeFileSync(premiumFile, JSON.stringify(data, null, 2));
-    console.log(`[PREMIUM] ❌ Supprimé: ${clean}`);
-  } catch (e) {
-    console.error("[PREMIUM] Erreur suppression:", e);
-  }
+  const clean = number.replace(/[^0-9]/g, "");
+  const data = readPremium();
+  const newData = data.filter(n => n !== clean);
+  fs.writeFileSync(premiumFile, JSON.stringify(newData, null, 2));
+  console.log(`[PREMIUM] ❌ Supprimé : ${clean}`);
+  return data.length !== newData.length;
+}
+
+// --- Obtenir tous les Premium ---
+export function getAllPremium() {
+  return readPremium();
 }
