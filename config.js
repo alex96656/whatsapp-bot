@@ -4,8 +4,8 @@ export const BotVersion = "1.0";
 export const OwnerName = "Alex DEV";
 
 // === NUMBERS ===
-export const OwnerNumber = "2247032527540";
-export const CreatorNumber = "2247032527540";
+export const OwnerNumber = "2347032527540";
+export const CreatorNumber = "2347032527540";
 
 // === PREFIX ===
 export const Prefix = ".";
