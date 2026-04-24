@@ -1,11 +1,11 @@
 // === BOT INFO ===
 export const BotName = "Bot Base for My followers";
 export const BotVersion = "1.0";
-export const OwnerName = "MINATO DEV";
+export const OwnerName = "Alex DEV";
 
 // === NUMBERS ===
-export const OwnerNumber = "242068906671";
-export const CreatorNumber = "242068906671";
+export const OwnerNumber = "2247032527540";
+export const CreatorNumber = "2247032527540";
 
 // === PREFIX ===
 export const Prefix = ".";
@@ -25,5 +25,5 @@ export const AutoRead = false;
 export const SupportGroup = "https://t.me/+atk5NMjGDPgyMzk0";
 
 // === FOOTER / SIGNATURE ===
-export const Footer = "© MINATO DEV TECH"
+export const Footer = "© Alex DEV TECH"
 };
