@@ -197,7 +197,7 @@ export async function handleCommand(message, minato) {
       const cmd = commands.get(command);
       const target = getTargetUser(message, args);
 
-      await cmd(message, obito, {
+      await cmd(message, ᴹᴿ•ᴀʟᴇx᭄, {
         sender,
         target,
         args,
